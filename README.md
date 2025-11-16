@@ -9,15 +9,15 @@ Sugerimos o uso das seguintes ferramentas acessíveis: [FullCalendar](https://fu
 
 ## Informações do trabalho
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome:João Pedro Alvarenga Santos
+- Matricula:898440
+- Proposta de projeto escolhida:Lugares e Experiências
+- Breve descrição sobre seu projeto: A ideia do projeto é produzir uma pagina de navegação indicando locais para visitar e ter experiencias novas
 
 **Print da tela com a implementação**
 
-<< Coloque aqui uma breve explicação da implementação feita nessa etapa>>
+Nesta etapa, foi adicionada ao projeto uma nova página dedicada à apresentação dinâmica dos dados cadastrados no CRUD de lugares turísticos. A implementação utiliza duas tecnologias principais: Mapbox e Chart.js, permitindo visualizar as informações do sistema de forma interativa e visualmente organizada.
 
-<<  COLOQUE A IMAGEM TELA 1 AQUI >>
+![print](./img/grafico.png)
 
-<<  COLOQUE A IMAGEM TELA 2 AQUI >>
+![print_tela_o2](./img/hoje.png)
