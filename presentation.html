@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apresentação Dinâmica — Lugares Turísticos</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    #map { width: 100%; height: 420px; border-radius:12px; }
+    .panel { background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+    .charts-row { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px;}
+    @media(max-width:900px){ .charts-row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <header class="site-header text-white text-center py-4">
+    <div class="container">
+      <h1>Apresentação Dinâmica</h1>
+      <p class="lead">Mapa interativo e gráficos com os dados da aplicação</p>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <section class="panel mb-3">
+      <h5>Mapa interativo (Mapbox)</h5>
+      <div id="map"></div>
+    </section>
+
+    <section class="charts-row">
+      <div class="panel">
+        <h6>Quantidade de atrações por país</h6>
+        <canvas id="barChart" width="400" height="250"></canvas>
+      </div>
+
+      <div class="panel">
+        <h6>Avaliação média por lugar</h6>
+        <canvas id="pieChart" width="400" height="250"></canvas>
+      </div>
+    </section>
+
+    <section class="panel mt-4">
+      <h6>Dados usados</h6>
+      <pre id="jsonPreview" style="max-height:240px;overflow:auto;background:#f7f7f7;padding:10px;border-radius:8px"></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer text-center py-3">
+    <div class="container">© 2025 Lugares e Experiências</div>
+  </footer>
+
+  <!-- Mapbox GL JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const MAPBOX_TOKEN = "SEU_MAPBOX_TOKEN_AQUI"; // <- substitua pelo seu token Mapbox
+  </script>
+  <script>
+  // Código da apresentação (fetch dados + criar mapa e gráficos)
+  (async function(){
+    const API = "http://localhost:3000/lugares";
+
+    async function fetchDados(){
+      const r = await fetch(API);
+      if(!r.ok) throw new Error("Falha ao buscar dados");
+      return await r.json();
+    }
+
+    let dados = [];
+    try { dados = await fetchDados(); } catch(e) { console.error(e); dados = []; }
+
+    // Mostrar JSON bruto
+    document.getElementById("jsonPreview").textContent = JSON.stringify(dados, null, 2);
+
+    // --- Mapbox ---
+    if(MAPBOX_TOKEN === "SEU_MAPBOX_TOKEN_AQUI"){
+      document.getElementById("map").innerHTML = "<p style='padding:20px;color:#666'>Adicione seu Mapbox token em presentation.html para visualizar o mapa.</p>";
+    } else {
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [0,20],
+        zoom: 1.4
+      });
+
+      // criar bounds para ajustar zoom automaticamente
+      const bounds = new mapboxgl.LngLatBounds();
+
+      dados.forEach(l => {
+        if(l.lng != null && l.lat != null){
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.style.width = '26px';
+          el.style.height = '26px';
+          el.style.borderRadius = '50%';
+          el.style.background = '#009688';
+          el.style.border = '2px solid #fff';
+          el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+
+          const popup = new mapboxgl.Popup({offset:25}).setHTML(
+            `<strong>${l.nome}</strong><br>${l.pais}<br><small>${(l.atracoes||[]).slice(0,3).join(", ")}</small>`
+          );
+
+          new mapboxgl.Marker(el)
+            .setLngLat([l.lng, l.lat])
+            .setPopup(popup)
+            .addTo(map);
+
+          bounds.extend([l.lng, l.lat]);
+        }
+      });
+
+      if(!bounds.isEmpty()){
+        map.fitBounds(bounds, { padding: 60, maxZoom: 8 });
+      }
+    }
+
+    // --- Chart.js: Atrações por país (barra)
+    const ctxBar = document.getElementById('barChart').getContext('2d');
+    const atracoesPorPais = {};
+    dados.forEach(l => { atracoesPorPais[l.pais] = (atracoesPorPais[l.pais] || 0) + (l.atracoes ? l.atracoes.length : 0); });
+    const barLabels = Object.keys(atracoesPorPais);
+    const barData = Object.values(atracoesPorPais);
+    new Chart(ctxBar, {
+      type: 'bar',
+      data: {
+        labels: barLabels,
+        datasets: [{ label: 'Quantidade de atrações', data: barData, backgroundColor: '#009688' }]
+      },
+      options: { responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
+    });
+
+    // --- Chart.js: Avaliação média por lugar (pizza)
+    const ctxPie = document.getElementById('pieChart').getContext('2d');
+    const pieLabels = dados.map(d=>d.nome);
+    const pieData = dados.map(d=> Number((d.avaliacao || 0).toFixed(2)));
+    const colors = pieLabels.map((_,i)=>`hsl(${(i*60)%360} 70% 50%)`);
+    new Chart(ctxPie, {
+      type: 'doughnut',
+      data: { labels: pieLabels, datasets:[{ data: pieData, backgroundColor: colors }] },
+      options: { responsive:true, plugins:{ legend:{ position:'bottom' } } }
+    });
+
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+/* ===========================
+   RESET E CONFIGURAÇÕES GERAIS
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ===========================
+        CABEÇALHO
+   =========================== */
+header {
+    background: linear-gradient(135deg, #0066ff, #00c2ff);
+    padding: 25px 40px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* ===========================
+        CONTAINER PRINCIPAL
+   =========================== */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+/* ===========================
+        BOTÕES
+   =========================== */
+button, .btn {
+    padding: 10px 18px;
+    background: #0066ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+    background: #004fcc;
+}
+
+.btn-danger {
+    background: #ff4757;
+}
+
+.btn-danger:hover {
+    background: #d63c49;
+}
+
+/* ===========================
+        FORMULÁRIOS
+   =========================== */
+form {
+    background: white;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+form label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+form textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+/* ===========================
+        LISTA DE CARDS
+   =========================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-body p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* ===========================
+      ÁREA DOS GRÁFICOS
+   =========================== */
+.charts-container {
+    margin-top: 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.chart-box {
+    margin: 40px 0;
+}
+
+/* ===========================
+        MAPA (MAPBOX)
+   =========================== */
+#map {
+    width: 100%;
+    height: 420px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ===========================
+        TABELA CRUD
+   =========================== */
+table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #0066ff;
+    color: #fff;
+    font-size: 16px;
+}
+
+tr:hover {
+    background: #f1f7ff;
+}
+
+/* ===========================
+        RESPONSIVIDADE
+   =========================== */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    .card img {
+        height: 150px;
+    }
+}

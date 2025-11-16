@@ -1,18 +1,64 @@
 {
   "lugares": [
     {
-      "nome": "sp",
-      "pais": "Brasil",
-      "descricao": "Belezas naturais, praias icônicas e o Cristo Redentor tornam o Rio inesquecível.",
-      "imagem": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-      "id": 2
+      "id": 1,
+      "nome": "Paris",
+      "pais": "França",
+      "melhor_epoca": "Abril a Outubro",
+      "imagem_principal": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80&auto=format&fit=crop",
+      "descricao": "Capital francesa repleta de arte, história e gastronomia. Visite a Torre Eiffel e o Louvre.",
+      "atracoes": ["Torre Eiffel","Museu do Louvre","Notre-Dame"],
+      "avaliacao": 4.7,
+      "lat": 48.8566,
+      "lng": 2.3522
     },
     {
-      "nome": ".",
-      "pais": ".",
-      "imagem": ".",
-      "descricao": ".",
-      "id": 3
+      "id": 2,
+      "nome": "Kyoto",
+      "pais": "Japão",
+      "melhor_epoca": "Março a Maio",
+      "imagem_principal": "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?w=1200&q=80&auto=format&fit=crop",
+      "descricao": "Antiga capital japonesa com templos, jardins zen e tradições.",
+      "atracoes": ["Fushimi Inari","Kinkaku-ji","Arashiyama"],
+      "avaliacao": 4.6,
+      "lat": 35.0116,
+      "lng": 135.7681
+    },
+    {
+      "id": 3,
+      "nome": "Rio de Janeiro",
+      "pais": "Brasil",
+      "melhor_epoca": "Dezembro a Março",
+      "imagem_principal": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&auto=format&fit=crop",
+      "descricao": "Cidade maravilhosa com praias, morros e vida cultural vibrante.",
+      "atracoes": ["Cristo Redentor","Pão de Açúcar","Praia de Copacabana"],
+      "avaliacao": 4.5,
+      "lat": -22.9068,
+      "lng": -43.1729
+    },
+    {
+      "id": 4,
+      "nome": "Cidade do Cabo",
+      "pais": "África do Sul",
+      "melhor_epoca": "Setembro a Abril",
+      "imagem_principal": "https://images.unsplash.com/photo-1508264165352-258a6f7b6f0d?w=1200&q=80&auto=format&fit=crop",
+      "descricao": "Montanhas, praias e vinícolas. Table Mountain é imperdível.",
+      "atracoes": ["Table Mountain","V&A Waterfront","Boulders Beach"],
+      "avaliacao": 4.4,
+      "lat": -33.9249,
+      "lng": 18.4241
+    },
+    {
+      "id": 5,
+      "nome": "Barcelona",
+      "pais": "Espanha",
+      "melhor_epoca": "Maio a Outubro",
+      "imagem_principal": "https://images.unsplash.com/photo-1509587584298-0f5d7c6f6f0d?w=1200&q=80&auto=format&fit=crop",
+      "descricao": "Arquitetura de Gaudí, praias e gastronomia catalã vibrante.",
+      "atracoes": ["Sagrada Família","Parque Güell","Casa Batlló"],
+      "avaliacao": 4.6,
+      "lat": 41.3851,
+      "lng": 2.1734
     }
   ]
 }
